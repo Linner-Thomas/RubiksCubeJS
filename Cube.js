@@ -9,7 +9,7 @@ class Cube
     static get SIZE() { return 3 }
 
     /**
-     * Initialize the RubiksCube by creating its Cubies
+     * Initialize the RubiksCube by creating its Cubies.
      */
     constructor()
     {
@@ -25,7 +25,7 @@ class Cube
     }
 
     /**
-     * Render the RubiksCube by rendering all its Cubies
+     * Render the RubiksCube by rendering all its Cubies.
      */
     render = () =>
     {
@@ -33,5 +33,46 @@ class Cube
         {
             cubie.render();
         })
+    }
+
+    /**
+     * Rotate a side of the Cube.
+     * 
+     * @param {*} axis     The Axis the side is on
+     * @param {*} layer    The layer of the side
+     * @param {*} angle    The angle to rotate
+     * @param {*} finished Signalizes if the rotation is finished
+     */
+    rotate = (axis, layer, angle, finished) =>
+    {
+        // x-Axis rotation
+        if (axis == EnumAxis.AxisX)
+        {
+            this.cubies.forEach(cubie =>
+            {
+                if (round(cubie.position.x) == layer)
+                    cubie.rotate(axis, angle, finished);
+            })
+        }
+
+        // y-Axis rotation
+        if (axis == EnumAxis.AxisY)
+        {
+            this.cubies.forEach(cubie =>
+            {
+                if (round(cubie.position.y) == layer)
+                    cubie.rotate(axis, angle, finished);  
+            })
+        }
+
+        // z-Axis rotation
+        if (axis == EnumAxis.AxisZ)
+        {
+            this.cubies.forEach(cubie =>
+            {
+                if (round(cubie.position.z) == layer)
+                    cubie.rotate(axis, angle, finished);  
+            })
+        }
     }
 }

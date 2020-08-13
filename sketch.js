@@ -4,6 +4,9 @@ var easycam;
 // Create instance of Cube
 var cube;
 
+// Create instance of Move
+var move = EnumMove.MoveU;
+
 /**
  * Call on startup for configuration of the Screen, Camera and Cube
  */
@@ -24,14 +27,37 @@ function setup()
 }
 
 /**
+ * Check for key presses
+ */
+function keyPressed()
+{
+  if (move.executing == false)
+  {
+    if (key == 'u') move = EnumMove.MoveU;
+    if (key == 'd') move = EnumMove.MoveD;
+    if (key == 'r') move = EnumMove.MoveR;
+    if (key == 'l') move = EnumMove.MoveL;
+    if (key == 'f') move = EnumMove.MoveF;
+    if (key == 'b') move = EnumMove.MoveB;
+
+    move.start();
+  }
+}
+
+/**
  * Call on every frame to render the Cube and Axis
  */
 function draw() 
 {
   background(200);
 
+  // Render Axis
   renderAxis();
 
+  // Update current Move
+  move.update();
+
+  // Render Cube
   cube.render();
 }
 
