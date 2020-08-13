@@ -27,18 +27,25 @@ function setup()
 }
 
 /**
- * Check for key presses
+ * Check for key presses and get corresponing Move.
  */
-function keyPressed()
+function keyPressed(event)
 {
   if (move.executing == false)
   {
-    if (key == 'u') move = EnumMove.MoveU;
-    if (key == 'd') move = EnumMove.MoveD;
-    if (key == 'r') move = EnumMove.MoveR;
-    if (key == 'l') move = EnumMove.MoveL;
-    if (key == 'f') move = EnumMove.MoveF;
-    if (key == 'b') move = EnumMove.MoveB;
+         if (event.code == 'KeyU') move = event.shiftKey ? EnumMove.MoveU_ : EnumMove.MoveU;
+    else if (event.code == 'KeyE') move = event.shiftKey ? EnumMove.MoveE_ : EnumMove.MoveE;
+    else if (event.code == 'KeyD') move = event.shiftKey ? EnumMove.MoveD_ : EnumMove.MoveD;
+
+    else if (event.code == 'KeyL') move = event.shiftKey ? EnumMove.MoveL_ : EnumMove.MoveL;
+    else if (event.code == 'KeyM') move = event.shiftKey ? EnumMove.MoveM_ : EnumMove.MoveM;
+    else if (event.code == 'KeyR') move = event.shiftKey ? EnumMove.MoveR_ : EnumMove.MoveR;
+
+    else if (event.code == 'KeyB') move = event.shiftKey ? EnumMove.MoveB_ : EnumMove.MoveB;
+    else if (event.code == 'KeyS') move = event.shiftKey ? EnumMove.MoveS_ : EnumMove.MoveS;
+    else if (event.code == 'KeyF') move = event.shiftKey ? EnumMove.MoveF_ : EnumMove.MoveF;
+    
+    else return;
 
     move.start();
   }

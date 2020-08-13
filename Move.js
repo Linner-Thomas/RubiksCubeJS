@@ -11,7 +11,7 @@ class Move
     {
         this.axis = axis;
         this.layer = layer;
-        this.direction = layer * direction;
+        this.direction = layer != 0 ? layer * direction : direction;
 
         this.executing = false;
         this.angle = 0;
