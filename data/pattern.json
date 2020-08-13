@@ -1,0 +1,50 @@
+[
+    {
+        "name" : "Checkerboard",
+        "sequence" : "MMEESS"
+    },
+    {
+        "name" : "Cube in Cube",
+        "sequence" : "FLFuRUFFLLulBdbLLU"
+    },
+    {
+        "name" : "Cube in Cube in Cube",
+        "sequence" : "ulufRRbRFUBBUbLuFURf"
+    },
+    {
+        "name" : "Solved in Scrambled",
+        "sequence" : "UUlUUlUUFFDLfLFRRdBBdLLdLLFFRR"
+    },
+    {
+        "name" : "Anaconda",
+        "sequence" : "LUbuRlBrFbDRdf"
+    },
+    {
+        "name" : "Python",
+        "sequence" : "FFrbUrLfLfBdRBLL"
+    },
+    {
+        "name" : "Black Mamba",
+        "sequence" : "RDLfRlDrUdBurd"
+    },
+    {
+        "name" : "Green Mamba",
+        "sequence" : "RDRFrfBDrubUDD"
+    },
+    {
+        "name" : "Twister",
+        "sequence" : "FrULflFuRUluLf"
+    },
+    {
+        "name" : "Tetris",
+        "sequence" : "LRFBudlr"
+    },
+    {
+        "name" : "Twisted Rings",
+        "sequence" : "FDfDDlbULDRUlfULUU"
+    },
+    {
+        "name" : "Exchanged Rings",
+        "sequence" : "bublDBUDDBULdluLLD"
+    }
+]

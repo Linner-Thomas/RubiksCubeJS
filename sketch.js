@@ -8,22 +8,49 @@ var cube;
 var move = EnumMove.MoveU;
 var moveSequence = [];
 
+var pattern = [];
+
+// Create instances of control elements
+var selectPattern;
 var inputSequence;
 var buttonRandom;
 var buttonExecute;
+var buttonReset;
 
 /**
  * Call on startup for configuration of the Screen, Camera and Cube
  */
-function setup()
+async function setup()
 {
   createCanvas(800, 800, WEBGL);
 
+  // Read in pattern from json file
+  pattern = await fetch("/data/pattern.json")
+    .then(response => response.json());
+
+  // Init select for pattern
+  selectPattern = createSelect();
+  selectPattern.option("");
+  pattern.forEach(pattern =>
+  {
+    selectPattern.option(pattern.name);
+  })
+  selectPattern.changed(patternSelected);
+  
+  // Init input field
   inputSequence = createInput();
+
+  // Init button for random sequence
   buttonRandom = createButton("Randomize Sequence");
   buttonRandom.mousePressed(randomSequence);
+
+  // Init button for sequence execution
   buttonExecute = createButton("Execute Sequence");
   buttonExecute.mousePressed(executeSeqence);
+
+  // Init button for reset
+  buttonReset = createButton("Reset Cube");
+  buttonReset.mousePressed(resetCube);
 
   // Fix for EasyCam to work with newer versions of p5.js
   Dw.EasyCam.prototype.apply = function(n) {
@@ -37,6 +64,21 @@ function setup()
   cube = new Cube();
 }
 
+/**
+ * Select a pattern from the dropdown
+ */
+const patternSelected = () =>
+{
+  Object.values(pattern).forEach(pattern =>
+  {
+    if (pattern.name == selectPattern.value())
+      inputSequence.value(pattern.sequence);
+  })
+}
+
+/**
+ * Generate a random Move sequence.
+ */
 const randomSequence = () =>
 {
   seq = "";
@@ -50,8 +92,12 @@ const randomSequence = () =>
   inputSequence.value(seq);
 }
 
+/**
+ * Execute Move sequence from input field.
+ */
 const executeSeqence = () =>
 {
+  // Test if sequence onyl contains valid symbols
   if (!inputSequence.value().match(/^[UEDLMRBSF]+$/i))
     alert("Invalid Sequence");
 
@@ -64,6 +110,14 @@ const executeSeqence = () =>
       moveSequence.push(Move.getBySymbol(symbol));
     });
   }
+}
+
+/**
+ * Reset the RubiksCube
+ */
+const resetCube = () =>
+{
+  cube = new Cube();
 }
 
 /**
@@ -104,9 +158,7 @@ function draw()
   // Update current Move
   move.update();
 
-  // Render Cube
-  cube.render();
-
+  // Start next Move from sequence if previous one is done
   if (move.executing == false)
   {
     if (moveSequence.length > 0)
@@ -115,6 +167,9 @@ function draw()
       move.start();
     }
   }
+
+  // Render Cube
+  cube.render();
 }
 
 /**
