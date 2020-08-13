@@ -6,6 +6,11 @@ var cube;
 
 // Create instance of Move
 var move = EnumMove.MoveU;
+var moveSequence = [];
+
+var inputSequence;
+var buttonRandom;
+var buttonExecute;
 
 /**
  * Call on startup for configuration of the Screen, Camera and Cube
@@ -13,6 +18,12 @@ var move = EnumMove.MoveU;
 function setup()
 {
   createCanvas(800, 800, WEBGL);
+
+  inputSequence = createInput();
+  buttonRandom = createButton("Randomize Sequence");
+  buttonRandom.mousePressed(randomSequence);
+  buttonExecute = createButton("Execute Sequence");
+  buttonExecute.mousePressed(executeSeqence);
 
   // Fix for EasyCam to work with newer versions of p5.js
   Dw.EasyCam.prototype.apply = function(n) {
@@ -24,6 +35,35 @@ function setup()
   easycam = createEasyCam();
 
   cube = new Cube();
+}
+
+const randomSequence = () =>
+{
+  seq = "";
+
+  for (let _ = 0; _ < 16; _ ++)
+  {
+    randomMove = Object.values(EnumMove)[floor(random(0, Object.values(EnumMove).length))];
+    seq += randomMove.symbol;
+  }
+
+  inputSequence.value(seq);
+}
+
+const executeSeqence = () =>
+{
+  if (!inputSequence.value().match(/^[UEDLMRBSF]+$/i))
+    alert("Invalid Sequence");
+
+  else
+  {
+    moveSequence = [];
+
+    [...inputSequence.value()].forEach(symbol =>
+    {
+      moveSequence.push(Move.getBySymbol(symbol));
+    });
+  }
 }
 
 /**
@@ -66,6 +106,15 @@ function draw()
 
   // Render Cube
   cube.render();
+
+  if (move.executing == false)
+  {
+    if (moveSequence.length > 0)
+    {
+      move = moveSequence.shift();
+      move.start();
+    }
+  }
 }
 
 /**
