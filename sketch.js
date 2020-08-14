@@ -22,6 +22,7 @@ var buttonReset;
  */
 async function setup()
 {
+  // Init canvas
   createCanvas(800, 800, WEBGL);
 
   // Read in pattern from json file
@@ -125,6 +126,9 @@ const resetCube = () =>
  */
 function keyPressed(event)
 {
+  // Block manual Move if input is selected
+  if (document.activeElement.localName == "input") return;
+
   if (move.executing == false)
   {
          if (event.code == 'KeyU') move = event.shiftKey ? EnumMove.MoveU_ : EnumMove.MoveU;
