@@ -18,12 +18,12 @@ var buttonExecute;
 var buttonReset;
 
 /**
- * Call on startup for configuration of the Screen, Camera and Cube
+ * Call on startup for configuration of the Screen, Camera and Cube.
  */
 async function setup()
 {
   // Init canvas
-  createCanvas(800, 800, WEBGL);
+  let canvas = createCanvas(500, 500, WEBGL);
 
   // Read in pattern from json file
   pattern = await fetch("/data/pattern.json")
@@ -66,7 +66,7 @@ async function setup()
 }
 
 /**
- * Select a pattern from the dropdown
+ * Select a pattern from the dropdown.
  */
 const patternSelected = () =>
 {
@@ -114,7 +114,7 @@ const executeSeqence = () =>
 }
 
 /**
- * Reset the RubiksCube
+ * Reset the RubiksCube.
  */
 const resetCube = () =>
 {
@@ -123,6 +123,8 @@ const resetCube = () =>
 
 /**
  * Check for key presses and get corresponing Move.
+ * 
+ * @param {*} event The received key event
  */
 function keyPressed(event)
 {
@@ -150,7 +152,7 @@ function keyPressed(event)
 }
 
 /**
- * Call on every frame to render the Cube and Axis
+ * Call on every frame to render the Cube and Axis.
  */
 function draw() 
 {
@@ -177,7 +179,7 @@ function draw()
 }
 
 /**
- * Render the x, y and z Axis
+ * Render the x, y and z Axis.
  */
 const renderAxis = () =>
 {

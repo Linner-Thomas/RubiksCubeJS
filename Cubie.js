@@ -31,6 +31,8 @@ class Cubie
      * @param {*} x The x-Position of the Cubie
      * @param {*} y The y-Position of the Cubie
      * @param {*} z The z-Position of the Cubie
+     * 
+     * @returns List representing the colors of the different faces
      */
     initColors = (x, y, z) =>
     {
@@ -58,6 +60,8 @@ class Cubie
 
     /**
      * Initialize Faces.
+     * 
+     * @returns List of all faces
      */
     initFaces = () =>
     {

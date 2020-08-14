@@ -1,5 +1,11 @@
 /**
- * This file contains an enumeration storing all available moves on the RubiksCube
+ * This file contains an enumeration storing all available moves on the RubiksCube.
+ * 
+ * Each move has a set of attributes:
+ * - symbol    : Symbol representing the move
+ * - axis      : Axis to rotate around
+ * - layer     : Layer to rotate
+ * - direction : 1 for clockwise rotation, -1 for counter clockwise rotation
  */
 const EnumMove =
 {

@@ -21,9 +21,11 @@ class Move
     }
 
     /**
-     * Get a Move by its symbol
+     * Get a Move by its symbol.
      * 
      * @param {*} symbol The symbol of the Move to get 
+     * 
+     * @returns Move based on symbol
      */
     static getBySymbol = (symbol) =>
     {
