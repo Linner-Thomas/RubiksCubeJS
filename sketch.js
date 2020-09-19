@@ -1,5 +1,5 @@
 // Create instance of Camera
-var easycam;
+var camera;
 
 // Create instance of Cube
 var cube;
@@ -53,14 +53,7 @@ async function setup()
   buttonReset = createButton("Reset Cube");
   buttonReset.mousePressed(resetCube);
 
-  // Fix for EasyCam to work with newer versions of p5.js
-  Dw.EasyCam.prototype.apply = function(n) {
-    var o = this.cam;
-    n = n || o.renderer,
-    n && (this.camEYE = this.getPosition(this.camEYE), this.camLAT = this.getCenter(this.camLAT), this.camRUP = this.getUpVector(this.camRUP), n._curCamera.camera(this.camEYE[0], this.camEYE[1], this.camEYE[2], this.camLAT[0], this.camLAT[1], this.camLAT[2], this.camRUP[0], this.camRUP[1], this.camRUP[2]))
-  };
-
-  easycam = createEasyCam();
+  camera = new Camera();
 
   cube = new Cube();
 }
@@ -152,11 +145,34 @@ function keyPressed(event)
 }
 
 /**
+ * Check for mouse dragging and redirect to Camera.
+ * 
+ * @param {*} event The received mouse event
+ */
+function mouseDragged(event) 
+{
+  camera.mouseDragged(event);
+}
+
+/**
+ * Check for mouse scrolling and redirect to Camera.
+ * 
+ * @param {*} event The received mouse event 
+ */
+function mouseWheel(event)
+{
+  camera.mouseWheel(event);
+}
+
+/**
  * Call on every frame to render the Cube and Axis.
  */
 function draw() 
 {
   background(200);
+
+  // Apply Camera transformation
+  camera.applyTransformation();
 
   // Render Axis
   renderAxis();
